@@ -7,7 +7,7 @@ const pgp = require('pg-promise')({
 
 const options = {
     hotst:'localhost',
-    database:'coffee-orders'
+    database:'coffee-orders-app'
 }
 
 const db = pgp(options);
