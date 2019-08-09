@@ -8,10 +8,10 @@ const server = http.createServer(async (req, res) => {
     console.log(req.url);
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
-    if (req.url === '/acoffee') {
+    if (req.url === '/oneCoffee') {
         const oneCoffee  = await Coffee.getById(3);
         const oneCoffeeJson = JSON.stringify(oneCoffee);
-        res.end(oneCoffee);
+        res.end(oneCoffeeJson);
     } else {
         res.end(`{message: "Thanks"}`);
     };
