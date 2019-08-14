@@ -9,14 +9,16 @@
     "db:create": "createdb coffee-orders-app",
     "db:init": "psql -f schema.sql coffee-orders-app && psql -f seed.sql coffee-orders-app",
     "db:destroy": "dropdb coffee-orders-app",
-    "db:reset":"npm run db:destroy; npm run db:create && npm run db:init",
+    "db:reset": "npm run db:destroy; npm run db:create && npm run db:init",
     "test": "mocha",
-    "test:watch":"mocha -w"
+    "test:watch": "mocha -w"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
     "pg-promise": "^9.0.0"
   },
   "devDependencies": {
