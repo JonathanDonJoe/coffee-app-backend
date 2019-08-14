@@ -1,22 +1,35 @@
-const http = require('http');
+// const http = require('http');
+const express = require('express');
 const Coffee = require('../models/coffee');
 
-const hostname = 'localhost';
+const app = express();
 const port = 3000;
 
-const server = http.createServer(async (req, res) => {
-    console.log(req.url);
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    if (req.url === '/oneCoffee') {
-        const oneCoffee  = await Coffee.getById(3);
-        const oneCoffeeJson = JSON.stringify(oneCoffee);
-        res.end(oneCoffeeJson);
-    } else {
-        res.end(`{message: "Thanks"}`);
-    };
+app.get('/:coffeeId',(req, res) => {
+    console.log('hihi');
+    console.log(req.params.coffeeId)
+    const oneCoffee = Coffee.getById(parseInt(req.params.coffeeId));
+    oneCoffee
+        .then((data) => {
+            console.log('new data');
+            console.log(data);
+            res.json(data);
+        
+        })
+});
+app.get('/',(req, res) =>{
+    console.log('bubu');
+    console.log(req.params)
+    const allCoffee = Coffee.getAll(req.params);
+    allCoffee
+        .then((data)=>{
+            console.log('alldata');
+            console.log(data);
+            res.send(data);
+        })
 })
 
-server.listen(port, hostname, () => {
-    console.log(`Server is running on ${port}${hostname}`);
-});
+app.listen(port);
+// server.listen(port, hostname, () => {
+//     console.log(`Server is running on ${port}${hostname}`);
+// });
